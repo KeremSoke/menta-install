@@ -15,5 +15,9 @@ menta-install (1.0.0) trixie; urgency=medium
   * Replace the hamburger menu with a traditional menu bar.
   * Open menta-sources for the software sources.
   * Remove Linux Mint and HamoniKR specific packages, links and settings.
+  * Add a package installer window for local .deb files (GDebi-like), also
+    available from File > Open Package File.
+  * Provide the PackageKit session D-Bus interface, so the file manager can
+    search for applications able to open a file type.
 
  -- Kerem Söke <keremsoke@gmail.com>  Mon, 05 Oct 2026 17:48:17 -0700

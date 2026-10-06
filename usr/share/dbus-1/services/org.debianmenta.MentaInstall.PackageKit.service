@@ -1,0 +1,5 @@
+# Lets applications ask menta-install to install software, for example to find
+# an application for a file type (org.freedesktop.PackageKit.Modify2).
+[D-BUS Service]
+Name=org.freedesktop.PackageKit
+Exec=/usr/lib/menta-install/menta-install-pk-session.py

@@ -29,6 +29,7 @@ from installer import dialogs
 import prefs
 import reviews
 from review_dialog import WriteReviewDialog
+import deb_installer
 import housekeeping
 from misc import print_timing, networking_available, add_network_proxy_to_env, VisibilityGroup
 import imaging
@@ -659,7 +660,9 @@ class Application(Gtk.Application):
         self.current_task = None
         self.recursion_buster = False
 
-        self.install_on_startup_file = None
+        self.startup_actions = []
+        self.mime_category = None
+        self.deb_windows = []
 
         self.review_cache = None
         self.current_pkginfo = None
@@ -708,6 +711,11 @@ class Application(Gtk.Application):
         Gtk.Application.do_command_line(self, command_line)
         args = command_line.get_arguments()
 
+        # "menta-install foo.deb" is the same as "menta-install install foo.deb"
+        if len(args) == 2 and args[1] not in ("list", "list-flatpak") and \
+                command_line.create_file_for_arg(args[1]).query_exists(None):
+            args = [args[0], "install", args[1]]
+
         num = len(args)
 
         if num > 1 and args[1] == "list":
@@ -715,31 +723,52 @@ class Application(Gtk.Application):
         elif num > 1 and args[1] == "list-flatpak":
             sys.exit(self.export_listing(flatpak_only=True))
         elif num == 3 and args[1] == "install":
-            for try_method in (Gio.File.new_for_path, Gio.File.new_for_uri):
-                file = try_method(args[2])
-
+            # Relative to the directory of the command, which can be another instance
+            for file in (command_line.create_file_for_arg(args[2]), Gio.File.new_for_uri(args[2])):
                 if file.query_exists(None):
-                    self.open([file], "")
-                    self.activate()
+                    path = file.get_path()
+                    if path is not None and deb_installer.is_deb_file(path):
+                        # Package files get their own window, the store isn't needed
+                        self.open_deb_file(path)
+                    else:
+                        self.open([file], "")
+                        self.activate()
                     return 0
 
-            print("menta-install: file not found", args[2])
-            sys.exit(1)
+            command_line.printerr_literal("menta-install: file not found %s\n" % args[2])
+            return 1
+        elif num > 2 and args[1] == "search-mime":
+            self.activate()
+            mime_types = args[2:]
+            self.run_when_ready(lambda: self.show_apps_for_mime_types(mime_types))
+            return 0
+        elif num == 3 and args[1] == "show":
+            self.activate()
+            name = args[2]
+            self.run_when_ready(lambda: self.show_package_by_name(name))
+            return 0
         elif num > 1:
-            print("menta-install: Unknown arguments", args[1:])
-            sys.exit(1)
+            command_line.printerr_literal("menta-install: Unknown arguments %s\n" % " ".join(args[1:]))
+            command_line.printerr_literal("Usage: menta-install [[install] FILE | search-mime MIME-TYPE... | show PACKAGE]\n")
+            return 1
 
         self.activate()
         return 0
 
-    def do_open(self, files, num, hint):
+    def run_when_ready(self, action):
         if self.gui_ready:
-            self.handle_command_line_install(files[0])
+            action()
         else:
-            self.install_on_startup_file = files[0]
+            self.startup_actions.append(action)
+
+    def do_open(self, files, num, hint):
+        file = files[0]
+        self.run_when_ready(lambda: self.handle_command_line_install(file))
 
     def handle_command_line_install(self, file):
-        if file.get_path().endswith(".flatpakrepo"):
+        if deb_installer.is_deb_file(file.get_path()):
+            self.open_deb_file(file.get_path())
+        elif file.get_path().endswith(".flatpakrepo"):
             if self.installer.is_busy():
                 dialog = Gtk.MessageDialog(self.main_window,
                                            Gtk.DialogFlags.MODAL,
@@ -753,6 +782,82 @@ class Application(Gtk.Application):
             self.start_add_new_flatpak_remote(file)
         elif file.get_path().endswith(".flatpakref"):
             self.installer.get_pkginfo_from_ref_file(file, self.on_pkginfo_from_uri_complete)
+
+    def open_deb_file(self, path):
+        window = deb_installer.DebInstallerWindow(self, path)
+        self.deb_windows.append(window)
+        window.connect("destroy", self.on_deb_window_destroyed)
+        window.present()
+
+    def on_deb_window_destroyed(self, window):
+        self.deb_windows.remove(window)
+
+        # The store was closed while package windows were open
+        if len(self.deb_windows) == 0 and self.main_window is not None and not self.main_window.get_visible():
+            self.quit_application()
+
+    def on_open_package_file_clicked(self, widget):
+        dialog = Gtk.FileChooserNative.new(_("Open Package File"), self.main_window,
+                                           Gtk.FileChooserAction.OPEN, _("_Open"), _("_Cancel"))
+        file_filter = Gtk.FileFilter()
+        file_filter.set_name(_("Packages (.deb, .flatpakref, .flatpakrepo)"))
+        for mime_type in deb_installer.DEB_MIME_TYPES + ("application/vnd.flatpak.ref", "application/vnd.flatpak.repo"):
+            file_filter.add_mime_type(mime_type)
+        for pattern in ("*.deb", "*.flatpakref", "*.flatpakrepo"):
+            file_filter.add_pattern(pattern)
+        dialog.add_filter(file_filter)
+
+        if dialog.run() == Gtk.ResponseType.ACCEPT:
+            file = dialog.get_file()
+            if file.get_path() is not None:
+                self.run_when_ready(lambda: self.handle_command_line_install(file))
+        dialog.destroy()
+
+    def show_apps_for_mime_types(self, mime_types):
+        content_type = Gio.content_type_from_mime_type(mime_types[0]) or mime_types[0]
+        description = Gio.content_type_get_description(content_type) or mime_types[0]
+        category = Category(_("Applications for %s files") % description, None, None)
+        self.mime_category = category
+
+        self.page_stack.set_visible_child_name(self.PAGE_SEARCHING)
+        self.stop_slideshow_timer()
+
+        def on_providers_found(providers):
+            if self.mime_category is not category:
+                return GLib.SOURCE_REMOVE
+
+            for pkg_type, name in providers:
+                if pkg_type == "f":
+                    pkginfo = self.installer.find_pkginfo(name, installer.PKG_TYPE_FLATPAK)
+                else:
+                    pkginfo = self.installer.find_pkginfo(name, installer.PKG_TYPE_APT)
+                if pkginfo is not None and pkginfo not in category.pkginfos and self.should_show_pkginfo(pkginfo):
+                    category.pkginfos.append(pkginfo)
+
+            self.show_category(category)
+
+            if len(category.pkginfos) == 0:
+                text = _("No applications were found to open %s files.") % GLib.markup_escape_text(description)
+                self.no_packages_found_label.set_markup("<big><b>%s</b></big>" % text)
+                self.no_packages_found_refresh_button.hide()
+
+            return GLib.SOURCE_REMOVE
+
+        try:
+            import mime_providers
+            mime_providers.find_providers_async(mime_types, on_providers_found)
+        except Exception as e:
+            print("menta-install: Could not search for applications: %s" % e)
+            on_providers_found([])
+
+    def show_package_by_name(self, name):
+        pkginfo = self.installer.find_pkginfo(name, installer.PKG_TYPE_APT) or \
+                  self.installer.find_pkginfo(name, installer.PKG_TYPE_FLATPAK)
+        if pkginfo is not None:
+            self.show_package(pkginfo, self.PAGE_LANDING)
+        else:
+            self.searchentry.set_text(name)
+            self.show_search_results(name)
 
     def start_add_new_flatpak_remote(self, file):
         self.page_stack.set_visible_child_name(self.PAGE_GENERATING_CACHE)
@@ -1035,6 +1140,9 @@ class Application(Gtk.Application):
 
         # File
         menu = add_menu(_("_File"))
+        add_item(menu, _("_Open Package File..."), "document-open-symbolic",
+                 self.on_open_package_file_clicked, "<Control>o")
+        menu.append(Gtk.SeparatorMenuItem())
         self.refresh_cache_menuitem = add_item(menu, _("_Refresh the List of Packages"), "view-refresh-symbolic",
                                                self.on_refresh_cache_clicked, "<Control>r")
         self.refresh_cache_menuitem.set_sensitive(False)
@@ -2016,13 +2124,23 @@ class Application(Gtk.Application):
             if res == Gtk.ResponseType.NO:
                 return True
 
+        if len(self.deb_windows) > 0:
+            # Package installer windows are still open, only hide the store
+            self.main_window.hide()
+            return True
+
+        self.quit_application()
+
+    def quit_application(self):
         # kill -9 won't kill mp subprocesses, we have to do them ourselves.
         housekeeping.kill()
         if self.review_cache:
             self.review_cache.kill()
 
-        # Not happy with Python when it comes to closing threads, so here's a radical method to get what we want.
-        os.system("kill -9 %s &" % os.getpid())
+        # Not happy with Python when it comes to closing threads, so exit right away without waiting for them.
+        sys.stdout.flush()
+        sys.stderr.flush()
+        os._exit(0)
 
     def on_action_button_clicked(self, button, task):
         if task.info_ready_status == task.STATUS_UNKNOWN:
@@ -2217,8 +2335,10 @@ class Application(Gtk.Application):
         self.gui_ready = True
         self.update_conditional_widgets()
 
-        if self.install_on_startup_file is not None:
-            self.handle_command_line_install(self.install_on_startup_file)
+        actions = self.startup_actions
+        self.startup_actions = []
+        for action in actions:
+            action()
 
         return False
 
@@ -3408,4 +3528,4 @@ if __name__ == "__main__":
         os.environ["RAYON_NUM_THREADS"] = "2"
 
     app = Application()
-    app.run(sys.argv)
+    sys.exit(app.run(sys.argv))

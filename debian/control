@@ -12,6 +12,7 @@ Depends: appstream,
          apt-config-icons,
          ca-certificates,
          gir1.2-gdkpixbuf-2.0,
+         gir1.2-appstream-1.0,
          gir1.2-glib-2.0,
          gir1.2-gtk-3.0,
          gir1.2-packagekitglib-1.0,
@@ -38,6 +39,9 @@ Description: Software Manager for Debian and Debian Menta
   * installs and removes Debian packages through PackageKit
   * installs Flatpaks and their add-ons, and shows whether their
     developer was verified by Flathub
+  * installs local .deb files with their dependencies, like GDebi
+  * finds applications for file types that have none, when asked by
+    the file manager (PackageKit session interface)
   * reads and writes reviews on the Open Desktop Ratings Service
  .
  Forked from the Linux Mint Software Manager (mintinstall).

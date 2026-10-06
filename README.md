@@ -23,6 +23,15 @@ Forked from Linux Mint's [mintinstall](https://github.com/linuxmint/mintinstall)
   - add-ons, `.flatpakref` and `.flatpakrepo` files, and `flatpak+https://` links.
 - Installed applications view, and a list of the operations in progress.
 - Traditional menu bar: File, Edit, View and Help.
+- **Package installer** for local `.deb` files, like GDebi: double-click a `.deb`
+  (or use **File > Open Package File**) to see its description, details, included
+  files and the dependencies it needs, then install, reinstall, upgrade or remove it.
+  Dependencies are installed from the repositories by PackageKit.
+- **Find an application for a file type**: menta-install provides the PackageKit
+  session D-Bus interface (`org.freedesktop.PackageKit.Modify`/`Modify2`). When a
+  file has no application, the file manager (Caja: "Do you want to search for an
+  application to open this file?") opens menta-install with the Debian packages
+  and Flatpaks able to open it, found in the AppStream catalogs.
 
 ### Where the data comes from
 
@@ -45,7 +54,9 @@ The package cache is stored in `~/.cache/menta-install/pkginfo.json`, or in
 | Command                          | Description                                                |
 |----------------------------------|------------------------------------------------------------|
 | `menta-install`                  | Opens the Software Manager                                 |
-| `menta-install install <file>`   | Opens a `.flatpakref` or `.flatpakrepo` file               |
+| `menta-install install <file>`   | Opens a `.deb`, `.flatpakref` or `.flatpakrepo` file       |
+| `menta-install search-mime <type>...` | Lists the applications which can open these MIME types |
+| `menta-install show <package>`   | Shows a package (Debian package or Flatpak ID)             |
 | `menta-install-fp-handler <url>` | Handles Flatpak files and `flatpak+https://` links         |
 | `menta-install-update-pkgcache`  | Regenerates the package cache                              |
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-05 18:08-0700\n"
+"POT-Creation-Date: 2026-10-05 18:49-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,468 +18,737 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: usr/lib/menta-install/menta_install.py:207
+#: usr/lib/menta-install/deb_installer.py:41
+msgid "Waiting"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:42
+msgid "Waiting for other software managers to finish"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:43
+msgid "Waiting for authentication"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:44
+msgid "Preparing"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:45
+msgid "Loading the list of packages"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:46
+#: usr/lib/menta-install/deb_installer.py:47
+msgid "Resolving dependencies"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:48
+msgid "Downloading"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:49
+msgid "Checking signatures"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:50
+msgid "Testing changes"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:51
+msgid "Applying changes"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:52
+#: usr/lib/menta-install/deb_installer.py:387
+#: usr/lib/menta-install/menta_install.py:3233
+msgid "Installing"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:53
+#: usr/lib/menta-install/deb_installer.py:390
+#: usr/lib/menta-install/menta_install.py:3221
+msgid "Removing"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:54
+msgid "Upgrading"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:55
+msgid "Cleaning up"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:56
+msgid "Finished"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:96
+#, python-format
+msgid "Package Installer - %s"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:127
+#: usr/lib/menta-install/deb_installer.py:260
+msgid "Install Package"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:132
+msgid "Remove Package"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:143
+msgid "Checking the package..."
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:167
+msgid "Description"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:170
+#: resources/menta-install.glade.h:33
+msgid "Details"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:174
+msgid "Included Files"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:229
+#, python-format
+msgid "This file could not be opened as a package: %s"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:256
+#, python-format
+msgid "Error: %s"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:261
+msgid "Ready to install"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:265
+msgid "Reinstall Package"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:266
+msgid "The same version is already installed"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:268
+msgid "Upgrade Package"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:269
+#, python-format
+msgid "An older version is installed (%s)"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:271
+msgid "Downgrade Package"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:272
+#, python-format
+msgid "A newer version is already installed (%s)"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:298
+msgid "Package"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:299
+msgid "Version"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:300
+msgid "Installed version"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:300
+#: usr/lib/menta-install/menta_install.py:3231
+msgid "Not installed"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:301
+msgid "Architecture"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:302
+msgid "Maintainer"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:303
+msgid "Section"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:304
+msgid "Priority"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:308
+msgid "Installed size"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:309
+msgid "File size"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:310
+msgid "Depends"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:310
+msgid "Recommends"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:311
+msgid "Conflicts"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:311
+msgid "Replaces"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:312
+msgid "Provides"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:328
+#: usr/lib/menta-install/menta_install.py:2980
+#: resources/menta-install.glade.h:31
+msgid "Homepage"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:345
+#, python-format
+msgid "Requires the installation of %d additional package"
+msgid_plural "Requires the installation of %d additional packages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: usr/lib/menta-install/deb_installer.py:349
+#, python-format
+msgid "requires the removal of %d package"
+msgid_plural "requires the removal of %d packages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: usr/lib/menta-install/deb_installer.py:356
+msgid "To install:"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:358
+msgid "To remove:"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:379
+msgid "Install an older version?"
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:380
+msgid ""
+"A newer version of this package is already installed. Downgrading can break "
+"the software that depends on it."
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:411
+msgid "The package was installed."
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:421
+msgid "The package is not installed."
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:425
+msgid "The package was removed."
+msgstr ""
+
+#: usr/lib/menta-install/deb_installer.py:469
+msgid ""
+"The package is still being installed or removed.\n"
+"Are you sure you want to quit?"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:208
 msgid "Add"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:213
-#: usr/lib/menta-install/menta_install.py:3102
+#: usr/lib/menta-install/menta_install.py:214
+#: usr/lib/menta-install/menta_install.py:3215
 #: usr/lib/menta-install/installer/dialogs.py:131
 #: usr/lib/menta-install/installer/dialogs.py:162
 msgid "Remove"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:229
+#: usr/lib/menta-install/menta_install.py:230
 msgid "Unavailable"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:472
+#: usr/lib/menta-install/menta_install.py:473
 msgid "This package is a Flatpak"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:587
+#: usr/lib/menta-install/menta_install.py:588
 msgid "All"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:748
+#: usr/lib/menta-install/menta_install.py:772
 msgid ""
 "Cannot process this file while there are active operations.\n"
 "Please try again after they finish."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:768
+#: usr/lib/menta-install/menta_install.py:795
+msgid "Open Package File"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:796
+msgid "_Open"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:796
+#: usr/lib/menta-install/review_dialog.py:23
+#: usr/lib/menta-install/installer/dialogs.py:30
+#: usr/lib/menta-install/installer/dialogs.py:224
+msgid "_Cancel"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:798
+msgid "Packages (.deb, .flatpakref, .flatpakrepo)"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:814
+#, python-format
+msgid "Applications for %s files"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:835
+#, python-format
+msgid "No applications were found to open %s files."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:868
 msgid "The Flatpak repo you are trying to add already exists."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:776
+#: usr/lib/menta-install/menta_install.py:876
 msgid "An error occurred attempting to add the Flatpak repo."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:784
+#: usr/lib/menta-install/menta_install.py:884
 msgid "Flatpak support is not currently available. Try installing flatpak."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:803
+#: usr/lib/menta-install/menta_install.py:903
 msgid ""
 "Flatpak support is not currently available. Try installing flatpak and "
 "gir1.2-flatpak-1.0."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:840
-#: usr/lib/menta-install/menta_install.py:841
-#: usr/lib/menta-install/menta_install.py:1927
+#: usr/lib/menta-install/menta_install.py:940
+#: usr/lib/menta-install/menta_install.py:941
+#: usr/lib/menta-install/menta_install.py:2030
 #: usr/lib/menta-install/installer/dialogs.py:241
 msgid "Software Manager"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1037
+#: usr/lib/menta-install/menta_install.py:1137
 msgid "_File"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1038
+#: usr/lib/menta-install/menta_install.py:1138
+msgid "_Open Package File..."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1141
 msgid "_Refresh the List of Packages"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1042
+#: usr/lib/menta-install/menta_install.py:1145
 msgid "_Quit"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1046
+#: usr/lib/menta-install/menta_install.py:1149
 msgid "_Edit"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1047
+#: usr/lib/menta-install/menta_install.py:1150
 msgid "Software _Sources"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1049
+#: usr/lib/menta-install/menta_install.py:1152
 msgid "_Preferences"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1052
+#: usr/lib/menta-install/menta_install.py:1155
 msgid "_View"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1053
+#: usr/lib/menta-install/menta_install.py:1156
 msgid "_Home"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1054
+#: usr/lib/menta-install/menta_install.py:1157
 msgid "_Installed Applications"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1058
+#: usr/lib/menta-install/menta_install.py:1161
 msgid "_Help"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1059
+#: usr/lib/menta-install/menta_install.py:1162
 msgid "_About"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1386
+#: usr/lib/menta-install/menta_install.py:1489
 #: resources/menta-install.glade.h:17
 msgid "Top Rated"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1434
+#: usr/lib/menta-install/menta_install.py:1537
 #: resources/menta-install.glade.h:15
 msgid "Featured"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1495
+#: usr/lib/menta-install/menta_install.py:1598
 #: resources/menta-install.glade.h:16
 msgid "Categories"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1539
+#: usr/lib/menta-install/menta_install.py:1642
 #, python-format
 msgid "Could not open the software sources: %s"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1578
+#: usr/lib/menta-install/menta_install.py:1681
 #, python-format
 msgid "%d task running"
 msgid_plural "%d tasks running"
 msgstr[0] ""
 msgstr[1] ""
 
-#: usr/lib/menta-install/menta_install.py:1720
+#: usr/lib/menta-install/menta_install.py:1823
 msgid "No screenshots available"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:1925
+#: usr/lib/menta-install/menta_install.py:2028
 msgid "About"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2013
+#: usr/lib/menta-install/menta_install.py:2116
 msgid ""
 "There are currently active operations.\n"
 "Are you sure you want to quit?"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2071
+#: usr/lib/menta-install/menta_install.py:2182
 msgid "Installed Applications"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2074
+#: usr/lib/menta-install/menta_install.py:2185
 msgid "Currently working on the following packages"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2079
+#: usr/lib/menta-install/menta_install.py:2190
 msgid "Internet"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2081
+#: usr/lib/menta-install/menta_install.py:2192
 msgid "Web"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2086
+#: usr/lib/menta-install/menta_install.py:2197
 msgid "Email"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2090
+#: usr/lib/menta-install/menta_install.py:2201
 msgid "Chat"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2093
+#: usr/lib/menta-install/menta_install.py:2204
 msgid "File sharing"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2099
+#: usr/lib/menta-install/menta_install.py:2210
 msgid "Sound and video"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2101
+#: usr/lib/menta-install/menta_install.py:2212
 msgid "Sound"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2103
+#: usr/lib/menta-install/menta_install.py:2214
 msgid "Video"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2108
+#: usr/lib/menta-install/menta_install.py:2219
 msgid "Graphics"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2112
+#: usr/lib/menta-install/menta_install.py:2223
 msgid "3D"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2114
+#: usr/lib/menta-install/menta_install.py:2225
 msgid "Drawing"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2116
+#: usr/lib/menta-install/menta_install.py:2227
 msgid "Photography"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2118
+#: usr/lib/menta-install/menta_install.py:2229
 msgid "Publishing"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2120
+#: usr/lib/menta-install/menta_install.py:2231
 msgid "Scanning"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2122
+#: usr/lib/menta-install/menta_install.py:2233
 msgid "Viewers"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2127
+#: usr/lib/menta-install/menta_install.py:2238
 msgid "Office"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2133
+#: usr/lib/menta-install/menta_install.py:2244
 msgid "Games"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2137
+#: usr/lib/menta-install/menta_install.py:2248
 msgid "Board games"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2139
+#: usr/lib/menta-install/menta_install.py:2250
 msgid "First-person"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2141
+#: usr/lib/menta-install/menta_install.py:2252
 msgid "Real-time strategy"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2143
+#: usr/lib/menta-install/menta_install.py:2254
 msgid "Turn-based strategy"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2145
+#: usr/lib/menta-install/menta_install.py:2256
 msgid "Emulators"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2147
+#: usr/lib/menta-install/menta_install.py:2258
 msgid "Simulation and racing"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2152
+#: usr/lib/menta-install/menta_install.py:2263
 msgid "Accessories"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2158
+#: usr/lib/menta-install/menta_install.py:2269
 msgid "System tools"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2165
+#: usr/lib/menta-install/menta_install.py:2276
 msgid "Fonts"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2171
+#: usr/lib/menta-install/menta_install.py:2282
 msgid "Science and Education"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2172
+#: usr/lib/menta-install/menta_install.py:2283
 msgid "Science"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2174
+#: usr/lib/menta-install/menta_install.py:2285
 msgid "Maths"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2176
+#: usr/lib/menta-install/menta_install.py:2287
 msgid "Education"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2178
+#: usr/lib/menta-install/menta_install.py:2289
 msgid "Electronics"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2184
+#: usr/lib/menta-install/menta_install.py:2295
 msgid "Programming"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2186
+#: usr/lib/menta-install/menta_install.py:2297
 msgid "Java"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2188
+#: usr/lib/menta-install/menta_install.py:2299
 msgid "PHP"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2190
+#: usr/lib/menta-install/menta_install.py:2301
 msgid "Python"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2192
+#: usr/lib/menta-install/menta_install.py:2303
 msgid "Essentials"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2197
+#: usr/lib/menta-install/menta_install.py:2308
 msgid "All Applications"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2655
+#: usr/lib/menta-install/menta_install.py:2768
 msgid "All operations complete"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2659
+#: usr/lib/menta-install/menta_install.py:2772
 #: resources/menta-install.glade.h:18
 msgid "No matching packages found"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2662
+#: usr/lib/menta-install/menta_install.py:2775
 msgid ""
 "No packages to show.\n"
 "This may indicate a problem - try refreshing the cache."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2795
+#: usr/lib/menta-install/menta_install.py:2908
 #: resources/menta-install.glade.h:25
 msgid "System Package"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2795
+#: usr/lib/menta-install/menta_install.py:2908
 msgid "Your system's package manager"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2807
+#: usr/lib/menta-install/menta_install.py:2920
 #, python-format
 msgid "Flatpak (%s)"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2839
+#: usr/lib/menta-install/menta_install.py:2952
 #, python-format
 msgid "by %s"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2841
+#: usr/lib/menta-install/menta_install.py:2954
 msgid "Unknown maintainer"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2867
-#: resources/menta-install.glade.h:31
-msgid "Homepage"
-msgstr ""
-
-#: usr/lib/menta-install/menta_install.py:2876
+#: usr/lib/menta-install/menta_install.py:2989
 #: resources/menta-install.glade.h:32
 msgid "Documentation"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2903
+#: usr/lib/menta-install/menta_install.py:3016
 msgid "Loading reviews..."
 msgstr ""
 
 #. TRANSLATORS: showing specific number of reviews in the list view and the header of the package details.
-#: usr/lib/menta-install/menta_install.py:2941
+#: usr/lib/menta-install/menta_install.py:3054
 #, python-format
 msgid "%d Review"
 msgid_plural "%d Reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: usr/lib/menta-install/menta_install.py:2992
+#: usr/lib/menta-install/menta_install.py:3105
 msgid ""
 "Reviews are not available right now. Check your Internet connection and try "
 "again."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2994
+#: usr/lib/menta-install/menta_install.py:3107
 msgid "There are no reviews yet. Be the first to review this application."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:2996
+#: usr/lib/menta-install/menta_install.py:3109
 msgid "Share your experience with other users."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3001
+#: usr/lib/menta-install/menta_install.py:3114
 msgid "Write a Review"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3034
+#: usr/lib/menta-install/menta_install.py:3147
 msgid "Thank you for your review!"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3035
+#: usr/lib/menta-install/menta_install.py:3148
 msgid "It will appear once it has been processed by the ratings service."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3040
-#: usr/lib/menta-install/menta_install.py:3073
+#: usr/lib/menta-install/menta_install.py:3153
+#: usr/lib/menta-install/menta_install.py:3186
 msgid ""
 "Unable to communicate with servers. Check your Internet connection and try "
 "again."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3041
+#: usr/lib/menta-install/menta_install.py:3154
 #, python-format
 msgid "Your review could not be submitted: %s"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3106 resources/package-tile.glade.h:7
+#: usr/lib/menta-install/menta_install.py:3219 resources/package-tile.glade.h:7
 msgid "Installed"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3108
-msgid "Removing"
-msgstr ""
-
-#: usr/lib/menta-install/menta_install.py:3110
+#: usr/lib/menta-install/menta_install.py:3223
 #: usr/lib/menta-install/installer/dialogs.py:129
 #: usr/lib/menta-install/installer/dialogs.py:152
 msgid "Install"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3118
-msgid "Not installed"
-msgstr ""
-
-#: usr/lib/menta-install/menta_install.py:3120
-msgid "Installing"
-msgstr ""
-
-#: usr/lib/menta-install/menta_install.py:3124
+#: usr/lib/menta-install/menta_install.py:3237
 msgid "Cannot remove"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3125
+#: usr/lib/menta-install/menta_install.py:3238
 msgid "Removing this package could cause irreparable damage to your system."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3127
+#: usr/lib/menta-install/menta_install.py:3240
 msgid "Cannot install"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3128
+#: usr/lib/menta-install/menta_install.py:3241
 msgid "Installing this package could cause irreparable damage to your system."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3136
+#: usr/lib/menta-install/menta_install.py:3249
 msgid "Not available"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3140
+#: usr/lib/menta-install/menta_install.py:3253
 msgid "Please use apt-get to install this package."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3142
+#: usr/lib/menta-install/menta_install.py:3255
 msgid "Use apt-get to remove this package."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3146
+#: usr/lib/menta-install/menta_install.py:3259
 msgid "Try again"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3149
+#: usr/lib/menta-install/menta_install.py:3262
 msgid "Something went wrong. Click to try again."
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3175
+#: usr/lib/menta-install/menta_install.py:3288
 #, python-format
 msgid "%(localSize)s of disk space required"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3179
+#: usr/lib/menta-install/menta_install.py:3292
 #, python-format
 msgid "%(downloadSize)s to download, %(localSize)s of disk space freed"
 msgstr ""
 
-#: usr/lib/menta-install/menta_install.py:3182
+#: usr/lib/menta-install/menta_install.py:3295
 #, python-format
 msgid "%(downloadSize)s to download, %(localSize)s of disk space required"
 msgstr ""
@@ -524,12 +793,6 @@ msgstr ""
 #: usr/lib/menta-install/review_dialog.py:18
 #, python-format
 msgid "Review %s"
-msgstr ""
-
-#: usr/lib/menta-install/review_dialog.py:23
-#: usr/lib/menta-install/installer/dialogs.py:30
-#: usr/lib/menta-install/installer/dialogs.py:224
-msgid "_Cancel"
 msgstr ""
 
 #: usr/lib/menta-install/review_dialog.py:24
@@ -760,10 +1023,6 @@ msgstr ""
 
 #: resources/menta-install.glade.h:30
 msgid "Remote:"
-msgstr ""
-
-#: resources/menta-install.glade.h:33
-msgid "Details"
 msgstr ""
 
 #: resources/menta-install.glade.h:34

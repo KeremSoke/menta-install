@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Package Installer
+GenericName=Package Installer
+Comment=Install Debian package files
+Keywords=deb;package;install;gdebi;
+Exec=menta-install install %f
+Icon=menta-install
+Terminal=false
+Type=Application
+Categories=GTK;System;PackageManager;
+NoDisplay=true
+MimeType=application/vnd.debian.binary-package;application/x-deb;
