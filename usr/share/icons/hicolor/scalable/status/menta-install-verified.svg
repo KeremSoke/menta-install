@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" version="1.1" viewBox="0 0 16 16">
+  <!-- Same shield as menta-install-unverified, filled, with a check mark -->
+  <path fill="#3584e4" d="M2 1v7c0 2.072 1.498 3.695 2.832 4.889a18.66 18.66 0 0 0 2.66 1.972l.516.305.512-.31s1.32-.8 2.65-2.002C12.5 11.65 14 10.044 14 8V1z"/>
+  <path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M5 7.6l2 2 4-4.2"/>
+</svg>

@@ -1,4 +1,4 @@
-Mintinstall installer tests:
+menta-install installer tests:
 
 apt errors:
 - select python3 package, should immediately change button to forbidden (can't remove) - no error popup

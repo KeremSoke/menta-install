@@ -3,10 +3,12 @@
 from urllib.parse import urlparse
 import json
 import os
+import sys
 
 from gi.repository import GLib
 
-from mintcommon.installer import installer
+sys.path.insert(0, os.path.abspath("./usr/lib/menta-install"))
+from installer import installer
 
 # The purpose of this script is to try and match up deb packages to their flatpak versions, if they exist. It
 # uses a single thread and takes around 5 minutes to complete on a 5ghz processor (if there are no new matches
@@ -24,7 +26,7 @@ from mintcommon.installer import installer
 #   - You need to add this list of entries to apt_flatpak_match_data.info, the bad ones in apt_ignore_list, and
 #     the matches in apt_flatpak_matches. The ignore list is used only for subsequent runs of this script to prevent
 #     you having to process those false-positives again. The match list is used both in this script as well as
-#     in mintinstall to allow linking.
+#     in menta-install to allow linking.
 #
 #     I doubt the current list is complete, either by our selection criteria not being that great or due to missing
 #     fields in the apps themselves. Improvements to the heuristic welcome.
@@ -34,7 +36,7 @@ ml = GLib.MainLoop.new(None, True)
 def quit_ml(sig=None, frame=None):
     ml.quit()
 
-os.chdir("./usr/lib/linuxmint/mintinstall")
+os.chdir("./usr/lib/menta-install")
 with open("apt_flatpak_match_data.info") as f:
     lists = json.load(f)
 

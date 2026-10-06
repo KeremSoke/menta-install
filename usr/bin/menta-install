@@ -1,0 +1,6 @@
+#!/usr/bin/python3
+
+import os
+import sys
+
+os.execv("/usr/lib/menta-install/menta_install.py", ["/usr/lib/menta-install/menta_install.py"] + sys.argv[1:])

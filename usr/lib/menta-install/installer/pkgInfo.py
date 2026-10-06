@@ -1,0 +1,510 @@
+import sys
+if sys.version_info.major < 3:
+    raise "python3 required"
+import os
+import threading
+
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+
+from .misc import warn, xml_markup_convert_to_text
+
+# this should hopefully be supplied by remote info someday.
+FLATHUB_MEDIA_BASE_URL = "https://dl.flathub.org/media/"
+
+# Icons for APT packages come from the Debian DEP-11 (AppStream) metadata that apt
+# downloads alongside the package lists, when the 'appstream' package is installed.
+# Cached icons are named <package>_<icon>.png and sorted by origin and size.
+DEP11_ICON_DIRS = ["/var/lib/swcatalog/icons", "/var/lib/app-info/icons"]
+DEP11_ICON_SIZES = ["64x64", "128x128", "48x48"]
+
+_dep11_icons = None
+_dep11_icons_lock = threading.Lock()
+
+def _get_dep11_icon_index():
+    # Maps package name -> {size: path}, built once on first use.
+    global _dep11_icons
+
+    with _dep11_icons_lock:
+        if _dep11_icons is not None:
+            return _dep11_icons
+
+        _dep11_icons = {}
+        for base in DEP11_ICON_DIRS:
+            try:
+                origins = os.listdir(base)
+            except OSError:
+                continue
+            for origin in origins:
+                for size in DEP11_ICON_SIZES:
+                    size_dir = os.path.join(base, origin, size)
+                    try:
+                        entries = os.scandir(size_dir)
+                    except OSError:
+                        continue
+                    with entries:
+                        for entry in entries:
+                            pkgname, sep, icon_name = entry.name.partition("_")
+                            if not sep:
+                                continue
+                            sizes = _dep11_icons.setdefault(pkgname, {})
+                            current = sizes.get(size)
+                            if current is None or _is_better_dep11_icon(pkgname, entry.name, os.path.basename(current)):
+                                sizes[size] = entry.path
+
+        return _dep11_icons
+
+def _is_better_dep11_icon(pkgname, new, current):
+    # Packages with several apps have several icons: prefer the one named after
+    # the package, then the shortest name (calibre-gui over calibre-ebook-edit).
+    exact = "%s_%s." % (pkgname, pkgname)
+    if new.startswith(exact) != current.startswith(exact):
+        return new.startswith(exact)
+    return (len(new), new) < (len(current), current)
+
+def get_dep11_icon(pkgname, size):
+    icons = _get_dep11_icon_index().get(pkgname)
+    if not icons:
+        return None
+
+    # Prefer the smallest cached icon that is at least as big as requested.
+    for candidate in sorted(DEP11_ICON_SIZES, key=lambda s: int(s.split("x")[0])):
+        if int(candidate.split("x")[0]) >= size and candidate in icons:
+            return icons[candidate]
+
+    return next(iter(icons.values()))
+
+def capitalize(string):
+    if string and len(string) > 1:
+        return (string[0].upper() + string[1:])
+    else:
+        return (string)
+
+class PkgInfo:
+    __slots__ = (
+        "name",
+        "pkg_hash",
+        "refid",
+        "remote",
+        "kind",
+        "arch",
+        "branch",
+        "commit",
+        "remote_url",
+        "display_name",
+        "summary",
+        "raw_description",
+        "description",
+        "version",
+        "icon",
+        "screenshots",
+        "homepage_url",
+        "help_url",
+        "categories",
+        "installed",
+        "verified",
+        "developer",
+        "keywords"
+    )
+
+    def __init__(self, pkg_hash=None):
+        # Saved stuff
+        self.pkg_hash = None
+        if pkg_hash:
+            self.pkg_hash = pkg_hash
+
+        self.name = None
+        # some flatpak-specific things
+        self.refid = ""
+        self.remote = ""
+        self.kind = 0
+        self.arch = ""
+        self.branch = ""
+        self.commit = ""
+        self.remote_url = ""
+
+        # Display info fetched by methods always
+        self.display_name = None
+        self.summary = None
+        self.description = None
+        self.raw_description = None
+        self.developer = None
+        self.version = None
+        self.icon = {}
+        self.screenshots = []
+        self.homepage_url = None
+        self.help_url = None
+        self.keywords = None
+
+        # Runtime categories
+        self.categories = []
+
+class AptPkgInfo(PkgInfo):
+    def __init__(self, pkg_hash=None, apt_pkg=None):
+        super(AptPkgInfo, self).__init__(pkg_hash)
+
+        # This is cheap.. but keeps from having an additional fp/apt check every time we check it.
+        self.verified = True
+
+        if apt_pkg:
+            self.name = apt_pkg.name
+            self.display_name = self.get_display_name(apt_pkg)
+            self.summary = self.get_summary(apt_pkg)
+            self.get_icon(48, apt_pkg)
+            self.get_icon(64, apt_pkg)
+
+    @classmethod
+    def from_json(cls, json_data:dict):
+        inst = cls()
+        inst.pkg_hash = json_data["pkg_hash"]
+        inst.name = json_data["name"]
+        inst.display_name = json_data["display_name"]
+        inst.summary = json_data["summary"]
+
+        try:
+            cached = json_data["icon"]
+
+            while True:
+                size, icon = cached.popitem()
+                inst.icon[int(size)] = icon
+        except Exception as e:
+            pass
+
+        return inst
+
+    def to_json(self):
+        trimmed_dict = {
+            key: getattr(self, key, None)
+                for key in ("pkg_hash",
+                            "name",
+                            "display_name",
+                            "summary",
+                            "icon")
+            }
+
+        return trimmed_dict
+
+    def get_display_name(self, apt_pkg=None):
+        # fastest
+        if self.display_name:
+            return self.display_name
+
+        if apt_pkg:
+            self.display_name = apt_pkg.name.capitalize()
+
+        if not self.display_name:
+            self.display_name = self.name.capitalize()
+
+        self.display_name = self.display_name.replace(":i386", "")
+
+        return self.display_name
+
+    def get_summary(self, apt_pkg=None):
+        # fastest
+        if self.summary:
+            return self.summary
+
+        if apt_pkg and apt_pkg.candidate:
+            candidate = apt_pkg.candidate
+
+            summary = ""
+            if candidate.summary is not None:
+                summary = candidate.summary
+
+                self.summary = capitalize(summary)
+
+        if self.summary is None:
+            self.summary = ""
+
+        return self.summary
+
+    def get_description(self, apt_pkg=None, for_search=False):
+        # fastest
+        if for_search and self.raw_description:
+            return self.raw_description
+        elif not for_search:
+            if self.description:
+                return self.description
+            elif self.raw_description:
+                self.description = xml_markup_convert_to_text(self.raw_description)
+                return self.description
+
+        if apt_pkg and apt_pkg.candidate and apt_pkg.candidate.description is not None:
+            self.raw_description = apt_pkg.candidate.description
+            if not for_search:
+                self.description = xml_markup_convert_to_text(self.raw_description)
+        else:
+            self.description = ""
+            self.raw_description = ""
+
+        return self.raw_description if for_search else self.description
+
+    def get_keywords(self):
+        return ""
+
+    def get_icon(self, size=64, apt_pkg=None):
+        try:
+            return self.icon[size]
+        except:
+            pass
+
+        theme = Gtk.IconTheme.get_default()
+        base_name = self.name.split(":")[0]
+
+        if theme.has_icon(base_name):
+            self.icon[size] = base_name
+            return self.icon[size]
+
+        # Look in the Debian AppStream icon cache
+        icon_path = get_dep11_icon(base_name, size)
+        if icon_path is not None:
+            self.icon[size] = icon_path
+            return self.icon[size]
+
+        for name in [self.name.split("-")[0], self.name.split(".")[-1].lower()]:
+            if theme.has_icon(name):
+                self.icon[size] = name
+                return self.icon[size]
+
+        # Look in pixmaps
+        for extension in ['svg', 'png', 'xpm']:
+            icon_path = "/usr/share/pixmaps/%s.%s" % (base_name, extension)
+            if os.path.exists(icon_path):
+                self.icon[size] = icon_path
+                return self.icon[size]
+
+        return None
+
+    def get_screenshots(self, apt_pkg=None):
+        return [] # handled in menta-install for now
+
+    def get_version(self, apt_pkg=None):
+        if self.version:
+            return self.version
+
+        if apt_pkg:
+            if apt_pkg.is_installed:
+                self.version = apt_pkg.installed.version
+            else:
+                if apt_pkg.candidate is not None:
+                    self.version = apt_pkg.candidate.version
+
+        if self.version is None:
+            self.version = ""
+
+        return self.version
+
+    def get_homepage_url(self, apt_pkg=None):
+        if self.homepage_url:
+            return self.homepage_url
+
+        if apt_pkg:
+            if apt_pkg.is_installed:
+                self.homepage_url = apt_pkg.installed.homepage
+            else:
+                if apt_pkg.candidate is not None:
+                    self.homepage_url = apt_pkg.candidate.homepage
+
+        if self.homepage_url is None:
+            self.homepage_url = ""
+
+        return self.homepage_url
+
+    def get_help_url(self, apt_pkg=None):
+        # We can only get the homepage from apt
+        return ""
+
+class FlatpakPkgInfo(PkgInfo):
+    def __init__(self, pkg_hash=None, remote=None, ref=None, remote_url=None, installed=False):
+        super(FlatpakPkgInfo, self).__init__(pkg_hash)
+
+        if not pkg_hash:
+            return
+
+        self.name = ref.get_name() # org.foo.Bar
+        self.remote = remote # "flathub"
+        self.remote_url = remote_url
+
+        self.installed = installed
+
+        self.refid = ref.format_ref() # app/org.foo.Bar/x86_64/stable
+        self.kind = ref.get_kind() # Will be app for now
+        self.arch = ref.get_arch()
+        self.branch = ref.get_branch()
+        self.commit = ref.get_commit()
+        self.verified = False
+
+    @classmethod
+    def from_json(cls, json_data:dict):
+        inst = cls()
+        inst.pkg_hash = json_data["pkg_hash"]
+        inst.name = json_data["name"]
+        inst.refid = json_data["refid"]
+        inst.remote = json_data["remote"]
+        inst.kind = json_data["kind"]
+        inst.arch = json_data["arch"]
+        inst.branch = json_data["branch"]
+        inst.commit = json_data["commit"]
+        inst.remote_url = json_data["remote_url"]
+        inst.verified = json_data["verified"]
+        inst.display_name = json_data["display_name"]
+        inst.summary = json_data["summary"]
+        inst.icon = json_data["icon"]
+        inst.keywords = json_data["keywords"]
+        return inst
+
+    def to_json(self):
+        trimmed_dict = {
+            key: getattr(self, key, None)
+                for key in (
+                    "pkg_hash",
+                    "name",
+                    "refid",
+                    "remote",
+                    "kind",
+                    "arch",
+                    "branch",
+                    "commit",
+                    "remote_url",
+                    "verified",
+                    "display_name",
+                    "summary",
+                    "icon",
+                    "keywords"
+                )
+            }
+
+        return trimmed_dict
+
+    def add_cached_appstream_data(self, as_pkg):
+        if as_pkg:
+            self.display_name = as_pkg.get_display_name()
+
+            summary = as_pkg.get_summary()
+            if summary is None:
+                summary = ""
+
+            self.summary = summary
+            self.icon["48"] = as_pkg.get_icon(48)
+            self.verified = as_pkg.get_verified()
+
+            try:
+                self.keywords = ",".join(as_pkg.get_keywords())
+            except TypeError:
+                self.keywords = ""
+        else:
+            self.display_name = self.name
+            self.summary = ""
+            self.icon = {}
+            self.verified = False
+            self.keywords = ""
+
+    def get_display_name(self):
+        return self.display_name
+
+    def get_summary(self):
+        return self.summary
+
+    def get_description(self, as_pkg=None, for_search=False):
+        if for_search and self.raw_description:
+            return self.raw_description
+        elif not for_search:
+            if self.description:
+                return self.description
+            elif self.raw_description:
+                self.description = xml_markup_convert_to_text(self.raw_description)
+                return self.description
+
+        if as_pkg and ((description := as_pkg.get_description()) is not None):
+            self.raw_description = description
+            if not for_search:
+                self.description = xml_markup_convert_to_text(self.raw_description)
+        else:
+            self.description = ""
+            self.raw_description = ""
+
+        return self.raw_description if for_search else self.description
+
+    def get_keywords(self):
+        return self.keywords
+
+    def get_icon(self, size=64, as_pkg=None):
+        try:
+            return self.icon[str(size)]
+        except KeyError:
+            pass
+
+        if as_pkg:
+            icon = as_pkg.get_icon(size)
+            if icon:
+                self.icon[str(size)] = icon
+                return icon
+
+        return None
+
+    def get_screenshots(self, as_pkg=None):
+        if len(self.screenshots) > 0:
+            return self.screenshots
+
+        if as_pkg:
+            self.screenshots = as_pkg.get_screenshots()
+
+        return self.screenshots
+
+    def get_version(self, as_pkg=None):
+        if self.version:
+            return self.version
+
+        if as_pkg:
+            version = as_pkg.get_version()
+            if version:
+                self.version = version
+
+        if self.version is None:
+            return ""
+
+        return self.version
+
+    def get_developer(self, as_pkg=None):
+        if self.developer:
+            return self.developer
+
+        if as_pkg:
+            self.developer = as_pkg.get_developer()
+
+        if self.developer is None:
+            return ""
+
+        return self.developer
+
+    def get_homepage_url(self, as_pkg=None):
+        if self.homepage_url:
+            return self.homepage_url
+
+        if as_pkg:
+            url = as_pkg.get_homepage_url()
+
+            if url is not None:
+                self.homepage_url = url
+
+        if self.homepage_url is None:
+            return ""
+
+        return self.homepage_url
+
+    def get_help_url(self, as_pkg=None):
+        if self.help_url:
+            return self.help_url
+
+        if as_pkg:
+            url = as_pkg.get_help_url()
+
+            if url is not None:
+                self.help_url = url
+
+        if self.help_url is None:
+            return ""
+
+        return self.help_url
+

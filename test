@@ -1,11 +1,11 @@
 #!/bin/bash
 
-sudo rm -rf /usr/lib/linuxmint/mintinstall
+sudo rm -rf /usr/lib/menta-install
 sudo cp -R usr /
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
-mkdir -p debian/mintinstall/usr/share/linuxmint/mintinstall
+sudo gtk-update-icon-cache /usr/share/icons/hicolor
 cd resources && sudo glib-compile-resources \
-    --target=/usr/share/linuxmint/mintinstall/mintinstall.gresource mintinstall.gresource.xml \
+    --target=/usr/share/menta-install/menta-install.gresource menta-install.gresource.xml \
     && cd ..
 
-DEBUG=1 mintinstall
+DEBUG=1 menta-install

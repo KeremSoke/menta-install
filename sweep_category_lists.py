@@ -2,7 +2,7 @@
 
 import os
 import apt
-os.chdir("usr/share/linuxmint/mintinstall/categories")
+os.chdir("usr/share/menta-install/categories")
 
 
 c = apt.Cache()

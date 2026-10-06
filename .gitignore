@@ -1,13 +1,16 @@
-debian/mintinstall
+debian/menta-install
 debian/.debhelper
 debian/*.substvars
 debian/*.log
 debian/debhelper-build-stamp
 debian/files
 
+# built resources
+menta-install.gresource
+
 # glade temp files
 tmp
-usr/share/linuxmint/mintinstall/*.glade~
+resources/*.glade~
 
 # cache files
-usr/lib/linuxmint/mintinstall/__pycache__
+__pycache__

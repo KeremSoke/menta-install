@@ -1,0 +1,5 @@
+#!/usr/bin/python3
+
+import os
+
+os.execv("/usr/lib/menta-install/menta-install-update-pkgcache.py", ["/usr/lib/menta-install/menta-install-update-pkgcache.py"])

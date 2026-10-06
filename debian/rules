@@ -1,16 +1,22 @@
 #!/usr/bin/make -f
 
-DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+DEB_VERSION := $(shell dpkg-parsechangelog -SVersion)
 
 %:
 	dh ${@}
 
+override_dh_auto_build:
+	cd resources && glib-compile-resources \
+		--target=../menta-install.gresource menta-install.gresource.xml
+
 override_dh_auto_install:
-	mkdir -p debian/mintinstall/usr/share/linuxmint/mintinstall
-	cd resources &&	glib-compile-resources \
-		--target=../debian/mintinstall/usr/share/linuxmint/mintinstall/mintinstall.gresource mintinstall.gresource.xml \
-		&& cd ..
+	install -D -m 644 menta-install.gresource \
+		debian/menta-install/usr/share/menta-install/menta-install.gresource
 	dh_auto_install
+
+override_dh_auto_clean:
+	rm -f menta-install.gresource
+	dh_auto_clean
 
 # Inject version number in the code
 override_dh_installdeb:

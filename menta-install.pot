@@ -1,0 +1,799 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-05 18:08-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: usr/lib/menta-install/menta_install.py:207
+msgid "Add"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:213
+#: usr/lib/menta-install/menta_install.py:3102
+#: usr/lib/menta-install/installer/dialogs.py:131
+#: usr/lib/menta-install/installer/dialogs.py:162
+msgid "Remove"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:229
+msgid "Unavailable"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:472
+msgid "This package is a Flatpak"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:587
+msgid "All"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:748
+msgid ""
+"Cannot process this file while there are active operations.\n"
+"Please try again after they finish."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:768
+msgid "The Flatpak repo you are trying to add already exists."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:776
+msgid "An error occurred attempting to add the Flatpak repo."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:784
+msgid "Flatpak support is not currently available. Try installing flatpak."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:803
+msgid ""
+"Flatpak support is not currently available. Try installing flatpak and "
+"gir1.2-flatpak-1.0."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:840
+#: usr/lib/menta-install/menta_install.py:841
+#: usr/lib/menta-install/menta_install.py:1927
+#: usr/lib/menta-install/installer/dialogs.py:241
+msgid "Software Manager"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1037
+msgid "_File"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1038
+msgid "_Refresh the List of Packages"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1042
+msgid "_Quit"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1046
+msgid "_Edit"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1047
+msgid "Software _Sources"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1049
+msgid "_Preferences"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1052
+msgid "_View"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1053
+msgid "_Home"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1054
+msgid "_Installed Applications"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1058
+msgid "_Help"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1059
+msgid "_About"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1386
+#: resources/menta-install.glade.h:17
+msgid "Top Rated"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1434
+#: resources/menta-install.glade.h:15
+msgid "Featured"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1495
+#: resources/menta-install.glade.h:16
+msgid "Categories"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1539
+#, python-format
+msgid "Could not open the software sources: %s"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1578
+#, python-format
+msgid "%d task running"
+msgid_plural "%d tasks running"
+msgstr[0] ""
+msgstr[1] ""
+
+#: usr/lib/menta-install/menta_install.py:1720
+msgid "No screenshots available"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:1925
+msgid "About"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2013
+msgid ""
+"There are currently active operations.\n"
+"Are you sure you want to quit?"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2071
+msgid "Installed Applications"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2074
+msgid "Currently working on the following packages"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2079
+msgid "Internet"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2081
+msgid "Web"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2086
+msgid "Email"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2090
+msgid "Chat"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2093
+msgid "File sharing"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2099
+msgid "Sound and video"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2101
+msgid "Sound"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2103
+msgid "Video"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2108
+msgid "Graphics"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2112
+msgid "3D"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2114
+msgid "Drawing"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2116
+msgid "Photography"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2118
+msgid "Publishing"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2120
+msgid "Scanning"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2122
+msgid "Viewers"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2127
+msgid "Office"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2133
+msgid "Games"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2137
+msgid "Board games"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2139
+msgid "First-person"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2141
+msgid "Real-time strategy"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2143
+msgid "Turn-based strategy"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2145
+msgid "Emulators"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2147
+msgid "Simulation and racing"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2152
+msgid "Accessories"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2158
+msgid "System tools"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2165
+msgid "Fonts"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2171
+msgid "Science and Education"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2172
+msgid "Science"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2174
+msgid "Maths"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2176
+msgid "Education"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2178
+msgid "Electronics"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2184
+msgid "Programming"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2186
+msgid "Java"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2188
+msgid "PHP"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2190
+msgid "Python"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2192
+msgid "Essentials"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2197
+msgid "All Applications"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2655
+msgid "All operations complete"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2659
+#: resources/menta-install.glade.h:18
+msgid "No matching packages found"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2662
+msgid ""
+"No packages to show.\n"
+"This may indicate a problem - try refreshing the cache."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2795
+#: resources/menta-install.glade.h:25
+msgid "System Package"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2795
+msgid "Your system's package manager"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2807
+#, python-format
+msgid "Flatpak (%s)"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2839
+#, python-format
+msgid "by %s"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2841
+msgid "Unknown maintainer"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2867
+#: resources/menta-install.glade.h:31
+msgid "Homepage"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2876
+#: resources/menta-install.glade.h:32
+msgid "Documentation"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2903
+msgid "Loading reviews..."
+msgstr ""
+
+#. TRANSLATORS: showing specific number of reviews in the list view and the header of the package details.
+#: usr/lib/menta-install/menta_install.py:2941
+#, python-format
+msgid "%d Review"
+msgid_plural "%d Reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: usr/lib/menta-install/menta_install.py:2992
+msgid ""
+"Reviews are not available right now. Check your Internet connection and try "
+"again."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2994
+msgid "There are no reviews yet. Be the first to review this application."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:2996
+msgid "Share your experience with other users."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3001
+msgid "Write a Review"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3034
+msgid "Thank you for your review!"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3035
+msgid "It will appear once it has been processed by the ratings service."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3040
+#: usr/lib/menta-install/menta_install.py:3073
+msgid ""
+"Unable to communicate with servers. Check your Internet connection and try "
+"again."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3041
+#, python-format
+msgid "Your review could not be submitted: %s"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3106 resources/package-tile.glade.h:7
+msgid "Installed"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3108
+msgid "Removing"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3110
+#: usr/lib/menta-install/installer/dialogs.py:129
+#: usr/lib/menta-install/installer/dialogs.py:152
+msgid "Install"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3118
+msgid "Not installed"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3120
+msgid "Installing"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3124
+msgid "Cannot remove"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3125
+msgid "Removing this package could cause irreparable damage to your system."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3127
+msgid "Cannot install"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3128
+msgid "Installing this package could cause irreparable damage to your system."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3136
+msgid "Not available"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3140
+msgid "Please use apt-get to install this package."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3142
+msgid "Use apt-get to remove this package."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3146
+msgid "Try again"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3149
+msgid "Something went wrong. Click to try again."
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3175
+#, python-format
+msgid "%(localSize)s of disk space required"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3179
+#, python-format
+msgid "%(downloadSize)s to download, %(localSize)s of disk space freed"
+msgstr ""
+
+#: usr/lib/menta-install/menta_install.py:3182
+#, python-format
+msgid "%(downloadSize)s to download, %(localSize)s of disk space required"
+msgstr ""
+
+#: usr/lib/menta-install/prefs.py:37
+msgid "General search options"
+msgstr ""
+
+#: usr/lib/menta-install/prefs.py:39
+msgid "Search in packages summary (slower search)"
+msgstr ""
+
+#: usr/lib/menta-install/prefs.py:41
+msgid "Search in packages description (even slower search)"
+msgstr ""
+
+#: usr/lib/menta-install/prefs.py:44
+#: usr/lib/menta-install/installer/dialogs.py:148
+msgid "Flatpaks"
+msgstr ""
+
+#: usr/lib/menta-install/prefs.py:46
+msgid "Show unverified Flatpaks (not recommended)"
+msgstr ""
+
+#: usr/lib/menta-install/prefs.py:52
+msgid "List all types"
+msgstr ""
+
+#: usr/lib/menta-install/prefs.py:53
+msgid "Only list the Flatpak"
+msgstr ""
+
+#: usr/lib/menta-install/prefs.py:54
+msgid "Only list the system package"
+msgstr ""
+
+#: usr/lib/menta-install/prefs.py:58
+msgid "When an app has multiple formats:"
+msgstr ""
+
+#: usr/lib/menta-install/review_dialog.py:18
+#, python-format
+msgid "Review %s"
+msgstr ""
+
+#: usr/lib/menta-install/review_dialog.py:23
+#: usr/lib/menta-install/installer/dialogs.py:30
+#: usr/lib/menta-install/installer/dialogs.py:224
+msgid "_Cancel"
+msgstr ""
+
+#: usr/lib/menta-install/review_dialog.py:24
+msgid "_Submit"
+msgstr ""
+
+#: usr/lib/menta-install/review_dialog.py:34
+msgid "Rating"
+msgstr ""
+
+#: usr/lib/menta-install/review_dialog.py:48
+msgid "Your name"
+msgstr ""
+
+#: usr/lib/menta-install/review_dialog.py:59
+msgid "Summary"
+msgstr ""
+
+#: usr/lib/menta-install/review_dialog.py:63
+msgid "Give your review a title"
+msgstr ""
+
+#: usr/lib/menta-install/review_dialog.py:68
+msgid "Review"
+msgstr ""
+
+#: usr/lib/menta-install/review_dialog.py:85
+msgid ""
+"Your review will be published on the Open Desktop Ratings Service "
+"(odrs.gnome.org) under the name above, and will be visible to the users of "
+"any Linux distribution."
+msgstr ""
+
+#: usr/lib/menta-install/review_dialog.py:116
+#: usr/lib/menta-install/reviews.py:83
+msgid "Anonymous"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:31
+msgid "C_ontinue"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:71
+#, python-format
+msgid "%s will be downloaded in total."
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:75
+#, python-format
+msgid "%s of disk space will be freed."
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:79
+#, python-format
+msgid "%s more disk space will be used."
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:84
+msgid "Additional changes are required"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:93
+msgid "Additional software will be installed"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:95
+msgid "Additional software will be re-installed"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:97
+msgid "Additional software will be removed"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:99
+msgid "Additional software will be purged"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:101
+msgid "Additional software will be upgraded"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:103
+msgid "Additional software will be downgraded"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:105
+msgid "Updates will be skipped"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:130
+msgid "Reinstall"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:132
+msgid "Purge"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:133
+#: usr/lib/menta-install/installer/dialogs.py:182
+msgid "Upgrade"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:134
+msgid "Downgrade"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:135
+msgid "Skip upgrade"
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:188
+msgid "Please take a look at the list of changes below."
+msgstr ""
+
+#: usr/lib/menta-install/installer/dialogs.py:323
+msgid "An error occurred"
+msgstr ""
+
+#: resources/menta-install.glade.h:1
+msgid "Unverified Flatpaks represent a huge security risk"
+msgstr ""
+
+#: resources/menta-install.glade.h:2
+msgid ""
+"They are not officially approved by the developer of the application and "
+"could be maintained by anyone."
+msgstr ""
+
+#: resources/menta-install.glade.h:3
+msgid ""
+"To avoid potential malware, it is strongly recommended not to use unverified "
+"Flatpaks."
+msgstr ""
+
+#: resources/menta-install.glade.h:4
+msgid "Package types"
+msgstr ""
+
+#: resources/menta-install.glade.h:5
+msgid "System"
+msgstr ""
+
+#: resources/menta-install.glade.h:6
+msgid ""
+"System packages are managed by your Linux distribution and use shared "
+"libraries and resources."
+msgstr ""
+
+#: resources/menta-install.glade.h:7
+msgid ""
+"They are safe, small and stable. They receive bug fixes and security updates "
+"but no newer versions."
+msgstr ""
+
+#: resources/menta-install.glade.h:8
+msgid "Flatpak"
+msgstr ""
+
+#: resources/menta-install.glade.h:9
+msgid ""
+"Flatpaks are maintained and updated directly by their owner, with no control "
+"from your Linux distribution. They usually provide the most up to date "
+"version."
+msgstr ""
+
+#: resources/menta-install.glade.h:10
+msgid ""
+"They take more disk space. Their security is not guaranteed by your Linux "
+"distribution, but by the Flatpak maintainer. It's essential you trust the "
+"maintainer before installing a Flatpak."
+msgstr ""
+
+#: resources/menta-install.glade.h:11
+msgid "Back"
+msgstr ""
+
+#: resources/menta-install.glade.h:12
+msgid "Limit search to current listing"
+msgstr ""
+
+#: resources/menta-install.glade.h:13
+msgid "Loading, please wait"
+msgstr ""
+
+#: resources/menta-install.glade.h:14
+msgid "Generating cache, one moment"
+msgstr ""
+
+#: resources/menta-install.glade.h:19
+msgid "Refresh"
+msgstr ""
+
+#: resources/menta-install.glade.h:20 resources/package-tile.glade.h:6
+msgid "Unverified Flatpak"
+msgstr ""
+
+#: resources/menta-install.glade.h:21
+msgid "The developer of this Flatpak was verified by Flathub"
+msgstr ""
+
+#: resources/menta-install.glade.h:22
+msgid "Verified"
+msgstr ""
+
+#: resources/menta-install.glade.h:23
+msgid "Launch"
+msgstr ""
+
+#: resources/menta-install.glade.h:24
+msgid "Please be patient. This can take some time..."
+msgstr ""
+
+#: resources/menta-install.glade.h:26
+msgid "Name:"
+msgstr ""
+
+#: resources/menta-install.glade.h:27
+msgid "Version:"
+msgstr ""
+
+#: resources/menta-install.glade.h:28
+msgid "Size:"
+msgstr ""
+
+#: resources/menta-install.glade.h:29
+msgid "Branch:"
+msgstr ""
+
+#: resources/menta-install.glade.h:30
+msgid "Remote:"
+msgstr ""
+
+#: resources/menta-install.glade.h:33
+msgid "Details"
+msgstr ""
+
+#: resources/menta-install.glade.h:34
+msgid "Reviews"
+msgstr ""
+
+#: resources/menta-install.glade.h:35
+msgid "Optional components"
+msgstr ""
+
+#: resources/menta-install.glade.h:36
+msgid "Searching software repositories, one moment"
+msgstr ""
+
+#: resources/package-tile.glade.h:1
+msgid "Package name"
+msgstr ""
+
+#: resources/package-tile.glade.h:2
+msgid "This is what it's all about"
+msgstr ""
+
+#: resources/package-tile.glade.h:3
+msgid "Flathub"
+msgstr ""
+
+#: resources/package-tile.glade.h:4
+msgid "Verified Flatpak"
+msgstr ""
+
+#: resources/package-tile.glade.h:5
+msgid "4.5"
+msgstr ""

@@ -1,9 +1,15 @@
 #!/bin/bash
 
-intltool-extract --type=gettext/glade resources/mintinstall.glade
-xgettext --language=Python -cTRANSLATORS --keyword=_ --keyword=N_ --output=mintinstall.pot  \
-    usr/lib/linuxmint/mintinstall/*.py                              \
-    generate_desktop_files                                                    \
-    resources/mintinstall.glade.h
+intltool-extract --type=gettext/glade resources/menta-install.glade
+intltool-extract --type=gettext/glade resources/package-tile.glade
+xgettext --language=Python \
+         -cTRANSLATORS \
+         --keyword=_ \
+         --keyword=N_ \
+         --from-code=UTF-8 \
+         --output=menta-install.pot \
+         usr/lib/menta-install/*.py \
+         usr/lib/menta-install/installer/*.py \
+         resources/*.glade.h
 
-rm -f resources/mintinstall.glade.h
+rm -f resources/*.glade.h

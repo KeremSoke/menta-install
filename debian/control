@@ -1,26 +1,43 @@
-Source: mintinstall
+Source: menta-install
 Section: admin
 Priority: optional
-Maintainer: Linux Mint <root@linuxmint.com>
-Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.5
+Maintainer: Kerem Söke <keremsoke@gmail.com>
+Build-Depends: debhelper-compat (= 13), libglib2.0-bin
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
 
-Package: mintinstall
+Package: menta-install
 Architecture: all
-Pre-Depends: ca-certificates (>= 20210101)
-Depends: python3 (>= 3.4),
-         python3-bs4,
-         python3-gi-cairo,
-         python3-lxml,
-         python3-setproctitle,
-         python3-xapp,
+Depends: appstream,
+         apt-config-icons,
+         ca-certificates,
          gir1.2-gdkpixbuf-2.0,
          gir1.2-glib-2.0,
          gir1.2-gtk-3.0,
-         gir1.2-xapp-1.0,
-         libgtk3-perl,
-         mint-common (>= 2.2.4),
-         app-install-data
-Recommends: gir1.2-flatpak-1.0, flatpak, xdg-desktop-portal-gtk
-Description: Software Manager
- A software manager to easily install new applications.
+         gir1.2-packagekitglib-1.0,
+         gir1.2-pango-1.0,
+         gir1.2-xmlb-2.0,
+         packagekit,
+         python3,
+         python3-apt,
+         python3-gi,
+         python3-gi-cairo,
+         python3-html2text,
+         python3-requests,
+         python3-setproctitle,
+         ${misc:Depends},
+Recommends: flatpak,
+            gir1.2-flatpak-1.0,
+            menta-sources,
+            xdg-desktop-portal-gtk,
+Description: Software Manager for Debian and Debian Menta
+ A software store to easily find, install and remove applications:
+  * browse Debian packages and Flatpaks by category, with featured
+    and top rated applications
+  * shows screenshots, descriptions, ratings and reviews
+  * installs and removes Debian packages through PackageKit
+  * installs Flatpaks and their add-ons, and shows whether their
+    developer was verified by Flathub
+  * reads and writes reviews on the Open Desktop Ratings Service
+ .
+ Forked from the Linux Mint Software Manager (mintinstall).

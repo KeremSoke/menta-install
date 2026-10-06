@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/debianmenta/menta-install">
+    <file>menta-install.glade</file>
+    <file>package-tile.glade</file>
+  </gresource>
+</gresources>
